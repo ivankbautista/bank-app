@@ -6,6 +6,19 @@ function Records(props) {
     depositAmount: "",
   });
 
+  const [transferTransaction, setTransfer] = useState({
+    senderEmail: "",
+    recipientEmail: "",
+    transferAmount: "",
+  });
+
+  const handleTransfer = (e) => {
+    setTransfer((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleChange = (e) => {
     setExpenses((prevState) => ({
       ...prevState,
@@ -21,6 +34,15 @@ function Records(props) {
   const onWithdraw = (e) => {
     e.preventDefault();
     props.handleWithdrawal(expenses.email, expenses.depositAmount);
+  };
+
+  const onTransfer = (e) => {
+    e.preventDefault();
+    props.handleTransferTransaction(
+      transferTransaction.senderEmail,
+      transferTransaction.recipientEmail,
+      transferTransaction.transferAmount
+    );
   };
 
   return (
@@ -93,12 +115,12 @@ function Records(props) {
               <h2 className="mb-2 font-bold">Sender Account</h2>
               <input
                 type="text"
-                name="email"
+                name="senderEmail"
                 list="name-datalist"
                 className="mb-5 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 placeholder="Choose client account"
-                onChange={handleChange}
+                onChange={handleTransfer}
               ></input>
               <datalist id="name-datalist">
                 {props.expenses.map((expenses, index) => {
@@ -113,12 +135,12 @@ function Records(props) {
               </datalist>
               <input
                 type="text"
-                name="email"
+                name="recipientEmail"
                 list="name-datalist"
                 className="mb-5 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 placeholder="Choose client account"
-                onChange={handleChange}
+                onChange={handleTransfer}
               ></input>
               <datalist id="name-datalist">
                 {props.expenses.map((expenses, index) => {
@@ -136,18 +158,18 @@ function Records(props) {
             <div className="form">
               <input
                 type="number"
-                name="depositAmount"
+                name="transferAmount"
                 className="mb-5 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="amount"
                 placeholder="Amount"
-                onChange={handleChange}
+                onChange={handleTransfer}
               ></input>
             </div>
 
             <button
               className="w-full align-center text-center py-3 rounded bg-green-500 hover:bg-gray-700 text-white font-bold focus:outline-none my-1"
               type="submit"
-              onClick={onDeposit}
+              onClick={onTransfer}
             >
               Transfer
             </button>
