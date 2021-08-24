@@ -90,6 +90,32 @@ function App() {
     setExpenses(updatedBalance);
   };
 
+  const handleTransferTransaction = (
+    senderEmail,
+    recepientEmail,
+    transferAmount
+  ) => {
+    const updatedAccounts = [...expenses];
+    const senderIndex = updatedAccounts.findIndex((e) => {
+      return e.email === senderEmail;
+    });
+
+    const recipientIndex = updatedAccounts.findIndex((e) => {
+      return e.email === recepientEmail;
+    });
+
+    const intBalanceTransfer = parseInt(transferAmount);
+    const intUpdatedBalanceTransfer = parseInt(
+      updatedAccounts[senderIndex].amount
+    );
+
+    updatedAccounts[senderIndex].amount =
+      intUpdatedBalanceTransfer - intBalanceTransfer;
+    updatedAccounts[recipientIndex].amount =
+      intUpdatedBalanceTransfer + intBalanceTransfer;
+    setExpenses(updatedAccounts);
+  };
+
   const clientPage = (
     <div>
       <div>
@@ -124,6 +150,7 @@ function App() {
           expenses={expenses}
           handleDeposit={handleDeposit}
           handleWithdrawal={handleWithdrawal}
+          handleTransferTransaction={handleTransferTransaction}
         />
       </div>
     </div>
