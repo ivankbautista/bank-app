@@ -76,7 +76,7 @@ function Records(props) {
               </datalist>
             </div>
 
-            <div className="form">
+            <div className="">
               <input
                 type="number"
                 name="depositAmount"
@@ -86,21 +86,22 @@ function Records(props) {
                 onChange={handleChange}
               ></input>
             </div>
-
-            <button
-              className="w-6/12 gap-3 align-center text-center py-3 rounded bg-blue-500 hover:bg-gray-700 text-white font-bold focus:outline-none my-1"
-              type="submit"
-              onClick={onDeposit}
-            >
-              Deposit
-            </button>
-            <button
-              className="w-6/12 align-center text-center py-3 rounded bg-red-500 hover:bg-gray-700 text-white font-bold focus:outline-none my-1"
-              type="submit"
-              onClick={onWithdraw}
-            >
-              Withdraw
-            </button>
+            <div className="flex justify-between">
+              <button
+                className="w-5/12 align-center text-center py-3 rounded bg-blue-500 hover:bg-gray-700 text-white font-bold focus:outline-none my-1"
+                type="submit"
+                onClick={onDeposit}
+              >
+                Deposit
+              </button>
+              <button
+                className="w-5/12 align-center text-center py-3 rounded bg-red-500 hover:bg-gray-700 text-white font-bold focus:outline-none my-1"
+                type="submit"
+                onClick={onWithdraw}
+              >
+                Withdraw
+              </button>
+            </div>
           </div>
         </div>
       </form>
@@ -133,6 +134,7 @@ function Records(props) {
                   );
                 })}
               </datalist>
+              <h2 className="mb-2 font-bold">Recipient Account</h2>
               <input
                 type="text"
                 name="recipientEmail"
