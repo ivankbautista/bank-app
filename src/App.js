@@ -105,14 +105,17 @@ function App() {
     });
 
     const intBalanceTransfer = parseInt(transferAmount);
-    const intUpdatedBalanceTransfer = parseInt(
+    const intUpdatedSenderBalance = parseInt(
       updatedAccounts[senderIndex].amount
+    );
+    const intUpdatedRecipientBalance = parseInt(
+      updatedAccounts[recipientIndex].amount
     );
 
     updatedAccounts[senderIndex].amount =
-      intUpdatedBalanceTransfer - intBalanceTransfer;
+      intUpdatedSenderBalance - intBalanceTransfer;
     updatedAccounts[recipientIndex].amount =
-      intUpdatedBalanceTransfer + intBalanceTransfer;
+      intUpdatedRecipientBalance + intBalanceTransfer;
     setExpenses(updatedAccounts);
   };
 
